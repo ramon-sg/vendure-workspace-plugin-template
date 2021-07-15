@@ -17,7 +17,8 @@
     "generate-types": "graphql-codegen --config ./codegen.json",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:watch:all": "jest --watchAll"
+    "test:watch:all": "jest --watchAll",
+    "test:e2e": "jest --config ./e2e/config/jest-e2e.json"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^2.0.2",

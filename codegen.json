@@ -27,6 +27,32 @@
         "typescript",
         "typescript-compatibility"
       ]
+    },
+    "e2e/graphql/types/generated-shop-types.ts": {
+      "schema": "http://localhost:3000/shop-api",
+      "plugins": [
+        {
+          "add": {
+            "content": "// tslint:disable"
+          }
+        },
+        "typescript",
+        "typescript-compatibility",
+        "typescript-operations"
+      ]
+    },
+    "e2e/graphql/types/generated-admin-types.ts": {
+      "schema": "http://localhost:3000/admin-api",
+      "plugins": [
+        {
+          "add": {
+            "content": "// tslint:disable"
+          }
+        },
+        "typescript",
+        "typescript-compatibility",
+        "typescript-operations"
+      ]
     }
   }
 }
