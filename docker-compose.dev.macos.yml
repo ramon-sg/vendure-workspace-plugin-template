@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  app:
+    volumes:
+      - app-data:/app
+  pgadmin:
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  app-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+      device: ":${PWD}"
+  pgadmin-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+      device: ":${PWD}/dev/data/pgadmin"

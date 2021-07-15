@@ -1,0 +1,17 @@
+FROM node:14
+
+ENV APP_DIR /app
+
+WORKDIR $APP_DIR
+
+# Persist bash history between runs
+RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/history/.bash_history" \
+  && echo $SNIPPET >> "/root/.bashrc"
+
+ENV WAIT_VERSION 2.7.2
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait
+RUN chmod +x /wait
+
+CMD ["bash", "-c", "yarn install && /wait && yarn dev:run:server"]
+
+

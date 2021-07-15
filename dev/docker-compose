@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Add NFS
+# source | https://www.jeffgeerling.com/blog/2020/revisiting-docker-macs-performance-nfs-volumes
+#
+# add `/System/Volumes/Data -alldirs -mapall=501:20 localhost` to /etc/exports
+# > sudo nano /etc/exports
+#
+# add `nfs.server.mount.require_resv_port = 0` to /etc/nfs.conf
+# > sudo nano /etc/nfs.conf
+
+docker-compose -f docker-compose.dev.yml -f docker-compose.dev.macos.yml "$@"

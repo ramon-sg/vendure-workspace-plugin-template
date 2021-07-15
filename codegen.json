@@ -1,0 +1,32 @@
+{
+  "overwrite": true,
+  "config": {
+    "strict": true
+  },
+  "generates": {
+    "src/generated-admin-types.ts": {
+      "schema": "http://localhost:3000/admin-api",
+      "plugins": [
+        {
+          "add": {
+            "content": "// tslint:disable"
+          }
+        },
+        "typescript",
+        "typescript-compatibility"
+      ]
+    },
+    "src/generated-shop-types.ts": {
+      "schema": "http://localhost:3000/shop-api",
+      "plugins": [
+        {
+          "add": {
+            "content": "// tslint:disable"
+          }
+        },
+        "typescript",
+        "typescript-compatibility"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+node_modules
+.idea
+/lib
+
+src/e2e/__data__
+
+dev/server/__data__
+dev/server/static
+dev/server/admin-ui
+
+# Docker data
+/dev/data/db/**
+!/dev/data/db/.keep
+/dev/data/pgadmin/**
+!/dev/data/pgadmin/.keep
+.DS_Store
+/.env.dev
+/dev/data/history/.bash_history
