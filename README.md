@@ -56,14 +56,14 @@ This repository also implements a basic Admin UI extension, which displays and a
 
 A development server is configured in the `dev-server` folder, using [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to spin up a Postgres database, as well as a server and worker.  This is used to test the plugin during development.
 
-To start the server, run:
-
-```bash
-yarn dev
-```
-
 To populate or reset the database, run the following command:
 
 ```bash
 yarn populate
+```
+
+To start the server, run:
+
+```bash
+yarn dev
 ```
