@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "module": "commonjs",
     "noLib": false,
     "skipLibCheck": true,
@@ -17,9 +18,13 @@
     "sourceMap": true,
     "newLine": "LF",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "dist",
     "baseUrl": "./",
+    "resolveJsonModule": true,
   },
+  "include": [
+    "src"
+  ],
   "files": [
     "./index.ts"
   ],
