@@ -59,7 +59,7 @@ A development server is configured in the `dev-server` folder, using [Docker](ht
 To populate or reset the database, run the following command:
 
 ```bash
-yarn populate
+yarn setup
 ```
 
 To start the server, run:

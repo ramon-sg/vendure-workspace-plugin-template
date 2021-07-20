@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 services:
   app:
     build:
@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
     ports:
-      - 4000:3000
+      - 6000:3000
 
   db:
     image: postgres
@@ -25,10 +25,10 @@ services:
     image: dpage/pgadmin4:4.18
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@localhost.dev
-      PGADMIN_DEFAULT_PASSWORD: "00000000"
+      PGADMIN_DEFAULT_PASSWORD: '00000000'
       PGADMIN_LISTEN_PORT: 80
     ports:
-      - "4001:80"
+      - '6080:80'
     volumes:
       - ./dev/data/pgadmin:/var/lib/pgadmin
     depends_on:

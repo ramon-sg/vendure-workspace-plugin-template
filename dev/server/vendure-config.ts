@@ -7,6 +7,7 @@ import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import path from 'path';
 import { VendureInternalPlugin } from '../../index';
+import pkg from '../../package.json';
 
 export const headlessConfig: VendureConfig = {
   apiOptions: {
@@ -38,7 +39,7 @@ export const headlessConfig: VendureConfig = {
     type: 'postgres',
     synchronize: false, // turn this off for production
     logging: false,
-    database: process.env.POSTGRES_DB,
+    database: pkg.name,
     host: process.env.POSTGRES_HOSTNAME,
     port: Number(process.env.POSTGRES_PORT),
     username: process.env.POSTGRES_USER,
