@@ -13,5 +13,11 @@ module.exports = {
     "**/*.(t|j)s"
   ],
   "coverageDirectory": "../coverage",
-  "testEnvironment": "node"
+  "testEnvironment": "node",
+
+  globals: {
+    'ts-jest': {
+      isolatedModules: true
+    }
+  },
 };

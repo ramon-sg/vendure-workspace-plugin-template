@@ -1,18 +1,41 @@
+import path from 'path';
 import { MutationLoginArgs } from './graphql/types/generated-shop-types';
 import { TEST_SETUP_TIMEOUT_MS } from './support/test-config';
 import { LOGIN } from './graphql/mutations/login.mutation';
-import { createVendureTestEnvironment } from './support/create-vendure-test-environment';
-import { startServer, stopServer } from './support/server-helper';
+import { registerInitializer, SqljsInitializer } from '@vendure/testing';
+
+import {
+  createTestEnvironment,
+  startEnvironment,
+  stopEnvironment,
+} from './support/helper';
+
+registerInitializer(
+  'sqljs',
+  new SqljsInitializer(path.join(__dirname, '__data__')),
+);
 
 describe('Plugin (e2e)', () => {
-  const { server, adminClient, shopClient } = createVendureTestEnvironment();
+  const {
+    server,
+    adminClient,
+    shopClient,
+    // mockApiServer
+  } = createTestEnvironment();
 
   beforeAll(async () => {
-    await startServer({ server, adminClient });
+    await startEnvironment({
+      server,
+      adminClient,
+      // mockApiServer
+    });
   }, TEST_SETUP_TIMEOUT_MS);
 
   afterAll(async () => {
-    await stopServer({ server });
+    await stopEnvironment({
+      server,
+      // mockApiServer
+    });
   });
 
   describe('shop api', () => {

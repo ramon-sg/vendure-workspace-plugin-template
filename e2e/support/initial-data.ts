@@ -3,18 +3,22 @@ import { InitialData } from '@vendure/core';
 
 export const initialData: InitialData = {
   defaultLanguage: LanguageCode.en,
-  defaultZone: 'Europe',
+  defaultZone: 'Americas',
   paymentMethods: [],
   taxRates: [
     { name: 'Standard Tax', percentage: 20 },
     { name: 'Reduced Tax', percentage: 10 },
     { name: 'Zero Tax', percentage: 0 },
   ],
-  shippingMethods: [
-    { name: 'Standard Shipping', price: 500 },
-    { name: 'Express Shipping', price: 1000 },
+  shippingMethods: [],
+  countries: [
+    { name: 'United Kingdom', code: 'GB', zone: 'Europe' },
+    {
+      name: 'Chile',
+      code: 'CL',
+      zone: 'Americas',
+    },
   ],
-  countries: [{ name: 'United Kingdom', code: 'GB', zone: 'Europe' }],
   collections: [
     {
       name: 'Plants',
