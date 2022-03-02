@@ -11,7 +11,7 @@ yarn global add degit
 In your terminal, run the following command
 
 ```bash
-yarn exec degit clouw/vendure-workspace-plugin-template vendure-plugin
+yarn exec degit ramon-sg/vendure-workspace-plugin-template vendure-plugin
 cd web
 yarn install
 ```
@@ -34,7 +34,7 @@ yarn test
 
 ## GraphQL Codegen
 
-This repository can automatically generate GraphQL types for use in the plugin code (see `src/e2e/plugin.e2e-spec.ts`).  To generate the types, ensure the development server is running, and use the command:
+This repository can automatically generate GraphQL types for use in the plugin code (see `src/e2e/plugin.e2e-spec.ts`). To generate the types, ensure the development server is running, and use the command:
 
 ```bash
 yarn generate-types
@@ -50,11 +50,11 @@ yarn lint:fix
 
 ## Admin UI
 
-This repository also implements a basic Admin UI extension, which displays and allows editing of the `Example` entity.  These UI screens make use of the `BaseList`, `BaseDetail`, and `BaseResolver` classes, which are helpful for handling CRUD operations.
+This repository also implements a basic Admin UI extension, which displays and allows editing of the `Example` entity. These UI screens make use of the `BaseList`, `BaseDetail`, and `BaseResolver` classes, which are helpful for handling CRUD operations.
 
 ## Development Server
 
-A development server is configured in the `dev-server` folder, using [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to spin up a Postgres database, as well as a server and worker.  This is used to test the plugin during development.
+A development server is configured in the `dev-server` folder, using [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to spin up a Postgres database, as well as a server and worker. This is used to test the plugin during development.
 
 To populate or reset the database, run the following command:
 
