@@ -3,19 +3,20 @@ import {
   bootstrap,
   defaultConfig,
   JobQueueService,
+  Logger,
   mergeConfig,
-} from "@vendure/core";
-import { populate } from "@vendure/core/cli";
-import { clearAllTables, populateCustomers } from "@vendure/testing";
-import path from "path";
+} from '@vendure/core';
+import { populate } from '@vendure/core/cli';
+import { clearAllTables, populateCustomers } from '@vendure/testing';
+import path from 'path';
 
-import { headlessConfig } from "./vendure-config";
+import { headlessConfig } from './vendure-config';
 
 // tslint:disable:no-console
 
 const initialData = require(path.join(
-  require.resolve("@vendure/create"),
-  "../assets/initial-data.json"
+  require.resolve('@vendure/create'),
+  '../assets/initial-data.json',
 ));
 
 /**
@@ -27,17 +28,17 @@ if (require.main === module) {
     defaultConfig,
     mergeConfig(headlessConfig, {
       authOptions: {
-        tokenMethod: "bearer",
+        tokenMethod: 'bearer',
         requireVerification: false,
       },
       importExportOptions: {
         importAssetsDir: path.join(
-          require.resolve("@vendure/create"),
-          "../assets/images"
+          require.resolve('@vendure/create'),
+          '../assets/images',
         ),
       },
       customFields: {},
-    })
+    }),
   );
   clearAllTables(populateConfig, true)
     .then(() =>
@@ -48,12 +49,12 @@ if (require.main === module) {
             return app;
           }),
         initialData,
-        path.join(require.resolve("@vendure/create"), "../assets/products.csv")
-      )
+        path.join(require.resolve('@vendure/create'), '../assets/products.csv'),
+      ),
     )
     .then(async (app) => {
-      console.log("populating customers...");
-      await populateCustomers(10, populateConfig, true);
+      console.log('populating customers...');
+      await populateCustomers(app, 10, (message) => Logger.error(message));
       return app.close();
     })
     .then(
@@ -61,6 +62,6 @@ if (require.main === module) {
       (err) => {
         console.log(err);
         process.exit(1);
-      }
+      },
     );
 }
