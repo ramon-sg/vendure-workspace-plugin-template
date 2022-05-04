@@ -34,6 +34,12 @@ export const headlessConfig: VendureConfig = {
       password: 'superadmin',
     },
     tokenMethod: 'cookie',
+
+    cookieOptions: {
+      secret:
+        process.env.COOKIE_SECRET ||
+        'a7fee281ed5ea1b12212712fe39342702fa52577fcb0cb0f17',
+    },
   },
   dbConnectionOptions: {
     type: 'postgres',
