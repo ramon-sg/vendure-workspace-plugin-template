@@ -1,14 +1,22 @@
-import path from 'path';
-import { MutationLoginArgs } from './graphql/types/generated-shop-types';
-import { TEST_SETUP_TIMEOUT_MS } from './support/test-config';
-import { LOGIN } from './graphql/mutations/login.mutation';
 import { registerInitializer, SqljsInitializer } from '@vendure/testing';
+import path from 'path';
+
+import { TEST_SETUP_TIMEOUT_MS } from './support/test-config';
 
 import {
   createTestEnvironment,
   startEnvironment,
   stopEnvironment,
 } from './support/helper';
+
+import {
+  loginMutation as loginShopMutation,
+  meQuery as meShopQuery,
+} from './graphql/shop';
+import {
+  loginMutation as loginAdminMutation,
+  meQuery as meAdminQuery,
+} from './graphql/admin';
 
 registerInitializer(
   'sqljs',
@@ -40,16 +48,41 @@ describe('Plugin (e2e)', () => {
 
   describe('shop api', () => {
     test('should log in', async () => {
-      const { login: result } = await shopClient.query<any, MutationLoginArgs>(
-        LOGIN,
-        {
-          username: 'superadmin',
-          password: 'superadmin',
-          rememberMe: true,
-        },
-      );
+      const username = 'superadmin';
+      const password = 'superadmin';
 
-      expect(result.identifier).toEqual('superadmin');
+      const [currentUser, err] = await loginShopMutation(shopClient, {
+        username,
+        password,
+        rememberMe: true,
+      });
+
+      expect(err).toBeNull();
+      expect(currentUser?.identifier).toEqual(username);
+
+      const me = await meShopQuery(shopClient);
+
+      expect(me?.identifier).toEqual(username);
+    });
+  });
+
+  describe('admin api', () => {
+    test('should log in', async () => {
+      const username = 'superadmin';
+      const password = 'superadmin';
+
+      const [currentUser, err] = await loginAdminMutation(shopClient, {
+        username,
+        password,
+        rememberMe: true,
+      });
+
+      expect(err).toBeNull();
+      expect(currentUser?.identifier).toEqual(username);
+
+      const me = await meAdminQuery(shopClient);
+
+      expect(me?.identifier).toEqual(username);
     });
   });
 });

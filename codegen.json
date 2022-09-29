@@ -28,8 +28,9 @@
         "typescript-compatibility"
       ]
     },
-    "e2e/graphql/types/generated-shop-types.ts": {
+    "e2e/graphql/shop/shop-generated-types.ts": {
       "schema": "http://localhost:3000/shop-api",
+      "documents": "e2e/graphql/shop/shop-definitions.graphql.ts",
       "plugins": [
         {
           "add": {
@@ -41,8 +42,9 @@
         "typescript-operations"
       ]
     },
-    "e2e/graphql/types/generated-admin-types.ts": {
+    "e2e/graphql/admin/admin-generated-types.ts": {
       "schema": "http://localhost:3000/admin-api",
+      "documents": "e2e/graphql/admin/admin-definitions.graphql.ts",
       "plugins": [
         {
           "add": {
