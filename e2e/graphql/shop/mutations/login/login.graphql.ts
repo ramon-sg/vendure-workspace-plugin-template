@@ -1,23 +1,9 @@
 import gql from 'graphql-tag';
 
-const CurrentUserFragment = gql`
-  fragment CurrentUser on CurrentUser {
-    id
-    identifier
-  }
-`;
+import { currentUserFragmentGraphql } from '../../fragments';
 
-export const ME = gql`
-  ${CurrentUserFragment}
-  query me {
-    me {
-      ...CurrentUser
-    }
-  }
-`;
-
-export const LOGIN = gql`
-  ${CurrentUserFragment}
+export const loginGraphql = gql`
+  ${currentUserFragmentGraphql}
   mutation login($username: String!, $password: String!, $rememberMe: Boolean) {
     login(username: $username, password: $password, rememberMe: $rememberMe) {
       ... on CurrentUser {

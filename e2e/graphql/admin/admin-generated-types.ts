@@ -5326,10 +5326,18 @@ export namespace CurrentUser {
   export type Fragment = CurrentUserFragment;
 }
 
-export namespace Me {
-  export type Variables = MeQueryVariables;
-  export type Query = MeQuery;
-  export type Me = (NonNullable<MeQuery['me']>);
+export namespace Customer {
+  export type Fragment = CustomerFragment;
+  export type User = (NonNullable<CustomerFragment['user']>);
+}
+
+export namespace CreateCustomer {
+  export type Variables = CreateCustomerMutationVariables;
+  export type Mutation = CreateCustomerMutation;
+  export type CreateCustomer = (NonNullable<CreateCustomerMutation['createCustomer']>);
+  export type CustomerInlineFragment = (DiscriminateUnion<(NonNullable<CreateCustomerMutation['createCustomer']>), { __typename?: 'Customer' }>);
+  export type EmailAddressConflictErrorInlineFragment = (DiscriminateUnion<(NonNullable<CreateCustomerMutation['createCustomer']>), { __typename?: 'EmailAddressConflictError' }>);
+  export type ErrorResultInlineFragment = (DiscriminateUnion<(NonNullable<CreateCustomerMutation['createCustomer']>), { __typename?: 'ErrorResult' }>);
 }
 
 export namespace Login {
@@ -5342,12 +5350,23 @@ export namespace Login {
   export type ErrorResultInlineFragment = (DiscriminateUnion<(NonNullable<LoginMutation['login']>), { __typename?: 'ErrorResult' }>);
 }
 
+export namespace Me {
+  export type Variables = MeQueryVariables;
+  export type Query = MeQuery;
+  export type Me = (NonNullable<MeQuery['me']>);
+}
+
 export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, identifier: string };
 
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+export type CustomerFragment = { __typename?: 'Customer', id: string, emailAddress: string, user?: { __typename?: 'User', id: string, identifier: string } | null | undefined };
+
+export type CreateCustomerMutationVariables = Exact<{
+  input: CreateCustomerInput;
+  password: Scalars['String'];
+}>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'CurrentUser', id: string, identifier: string } | null | undefined };
+export type CreateCustomerMutation = { __typename?: 'Mutation', createCustomer: { __typename?: 'Customer', id: string, emailAddress: string, user?: { __typename?: 'User', id: string, identifier: string } | null | undefined } | { __typename?: 'EmailAddressConflictError', errorCode: ErrorCode, message: string } };
 
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
@@ -5357,3 +5376,8 @@ export type LoginMutationVariables = Exact<{
 
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'CurrentUser', id: string, identifier: string } | { __typename?: 'InvalidCredentialsError', errorCode: ErrorCode, message: string, authenticationError: string } | { __typename?: 'NativeAuthStrategyError', errorCode: ErrorCode, message: string } };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'CurrentUser', id: string, identifier: string } | null | undefined };

@@ -12,8 +12,11 @@ import {
 import {
   loginMutation as loginShopMutation,
   meQuery as meShopQuery,
+  addItemMutation,
 } from './graphql/shop';
+
 import {
+  createCustomerMutation,
   loginMutation as loginAdminMutation,
   meQuery as meAdminQuery,
 } from './graphql/admin';
@@ -22,6 +25,9 @@ registerInitializer(
   'sqljs',
   new SqljsInitializer(path.join(__dirname, '__data__')),
 );
+
+const adminUsername = 'superadmin';
+const adminPassword = 'superadmin';
 
 describe('Plugin (e2e)', () => {
   const {
@@ -46,43 +52,70 @@ describe('Plugin (e2e)', () => {
     });
   });
 
-  describe('shop api', () => {
-    test('should log in', async () => {
-      const username = 'superadmin';
-      const password = 'superadmin';
+  describe('admin api', () => {
+    describe('login', () => {
+      test('should log in', async () => {
+        const [currentUser, err] = await loginAdminMutation(shopClient, {
+          username: adminUsername,
+          password: adminPassword,
+          rememberMe: true,
+        });
 
-      const [currentUser, err] = await loginShopMutation(shopClient, {
-        username,
-        password,
-        rememberMe: true,
+        expect(err).toBeNull();
+        expect(currentUser?.identifier).toEqual(adminUsername);
+
+        const me = await meAdminQuery(shopClient);
+
+        expect(me?.identifier).toEqual(adminUsername);
       });
+    });
 
-      expect(err).toBeNull();
-      expect(currentUser?.identifier).toEqual(username);
+    describe('create customer', () => {
+      test('should create a new customer', async () => {
+        const email = 'user-one@mail.com';
+        const password = '00000000';
 
-      const me = await meShopQuery(shopClient);
+        const [customer, err] = await createCustomerMutation(adminClient, {
+          email,
+          password,
+        });
 
-      expect(me?.identifier).toEqual(username);
+        expect(err).toBeNull();
+
+        expect(customer?.emailAddress).toEqual(email);
+      });
     });
   });
 
-  describe('admin api', () => {
-    test('should log in', async () => {
-      const username = 'superadmin';
-      const password = 'superadmin';
+  describe('shop api', () => {
+    describe('login', () => {
+      test('should log in', async () => {
+        const [currentUser, err] = await loginShopMutation(shopClient, {
+          username: adminUsername,
+          password: adminPassword,
+          rememberMe: true,
+        });
 
-      const [currentUser, err] = await loginAdminMutation(shopClient, {
-        username,
-        password,
-        rememberMe: true,
+        expect(err).toBeNull();
+        expect(currentUser?.identifier).toEqual(adminUsername);
+
+        const me = await meShopQuery(shopClient);
+
+        expect(me?.identifier).toEqual(adminUsername);
       });
+    });
 
-      expect(err).toBeNull();
-      expect(currentUser?.identifier).toEqual(username);
+    describe('add Item', () => {
+      test('should add an item to the cart', async () => {
+        const productVariantId = 'T_1';
+        const [data, err] = await addItemMutation(shopClient, {
+          productVariantId,
+          quantity: 3,
+        });
 
-      const me = await meAdminQuery(shopClient);
-
-      expect(me?.identifier).toEqual(username);
+        expect(err).toBeNull();
+        expect(data?.lines[0]?.productVariant.id).toEqual(productVariantId);
+      });
     });
   });
 });

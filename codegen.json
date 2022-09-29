@@ -30,7 +30,7 @@
     },
     "e2e/graphql/shop/shop-generated-types.ts": {
       "schema": "http://localhost:3000/shop-api",
-      "documents": "e2e/graphql/shop/shop-definitions.graphql.ts",
+      "documents": "e2e/graphql/shop/**/*.graphql.ts",
       "plugins": [
         {
           "add": {
@@ -44,7 +44,7 @@
     },
     "e2e/graphql/admin/admin-generated-types.ts": {
       "schema": "http://localhost:3000/admin-api",
-      "documents": "e2e/graphql/admin/admin-definitions.graphql.ts",
+      "documents": "e2e/graphql/admin/**/*.graphql.ts",
       "plugins": [
         {
           "add": {

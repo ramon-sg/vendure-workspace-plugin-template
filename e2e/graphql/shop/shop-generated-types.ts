@@ -725,17 +725,11 @@ export type Customer = Node & {
   firstName: Scalars['String'];
   id: Scalars['ID'];
   lastName: Scalars['String'];
-  oneclickCards: OneclickCardList;
   orders: OrderList;
   phoneNumber?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
   user?: Maybe<User>;
-};
-
-
-export type CustomerOneclickCardsArgs = {
-  options?: Maybe<OneclickCardListOptions>;
 };
 
 
@@ -1569,11 +1563,8 @@ export type Mutation = {
   authenticate: AuthenticationResult;
   /** Create a new Customer Address */
   createCustomerAddress: Address;
-  createOneclickInscription: OneclickInscription;
-  createWebpayPlusTransaction: WebpayPlusTransaction;
   /** Delete an existing Address */
   deleteCustomerAddress: Success;
-  deleteCustomerOneclickCard: DeletionResponse;
   /** Authenticates the user using the native authentication strategy. This mutation is an alias for `authenticate({ native: { ... }})` */
   login: NativeAuthenticationResult;
   /** End the current authenticated session */
@@ -1680,23 +1671,7 @@ export type MutationCreateCustomerAddressArgs = {
 };
 
 
-export type MutationCreateOneclickInscriptionArgs = {
-  responseUrl: Scalars['String'];
-};
-
-
-export type MutationCreateWebpayPlusTransactionArgs = {
-  responseNokUrl: Scalars['String'];
-  responseOkUrl: Scalars['String'];
-};
-
-
 export type MutationDeleteCustomerAddressArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationDeleteCustomerOneclickCardArgs = {
   id: Scalars['ID'];
 };
 
@@ -1864,63 +1839,6 @@ export type NumberOperators = {
 export type NumberRange = {
   end: Scalars['Float'];
   start: Scalars['Float'];
-};
-
-export type OneclickCard = Node & {
-  __typename?: 'OneclickCard';
-  createdAt: Scalars['DateTime'];
-  customer: Customer;
-  id: Scalars['ID'];
-  isActive: Scalars['Boolean'];
-  metadata?: Maybe<Scalars['JSON']>;
-  number: Scalars['String'];
-  type: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
-  username: Scalars['String'];
-};
-
-export type OneclickCardFilterParameter = {
-  createdAt?: Maybe<DateOperators>;
-  id?: Maybe<IdOperators>;
-  isActive?: Maybe<BooleanOperators>;
-  number?: Maybe<StringOperators>;
-  type?: Maybe<StringOperators>;
-  updatedAt?: Maybe<DateOperators>;
-  username?: Maybe<StringOperators>;
-};
-
-export type OneclickCardList = PaginatedList & {
-  __typename?: 'OneclickCardList';
-  items: Array<OneclickCard>;
-  totalItems: Scalars['Int'];
-};
-
-export type OneclickCardListOptions = {
-  /** Allows the results to be filtered */
-  filter?: Maybe<OneclickCardFilterParameter>;
-  /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
-  filterOperator?: Maybe<LogicalOperator>;
-  /** Skips the first n results, for use in pagination */
-  skip?: Maybe<Scalars['Int']>;
-  /** Specifies which properties to sort the results by */
-  sort?: Maybe<OneclickCardSortParameter>;
-  /** Takes n results, for use in pagination */
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type OneclickCardSortParameter = {
-  createdAt?: Maybe<SortOrder>;
-  id?: Maybe<SortOrder>;
-  number?: Maybe<SortOrder>;
-  type?: Maybe<SortOrder>;
-  updatedAt?: Maybe<SortOrder>;
-  username?: Maybe<SortOrder>;
-};
-
-export type OneclickInscription = {
-  __typename?: 'OneclickInscription';
-  token: Scalars['String'];
-  url: Scalars['String'];
 };
 
 export type Order = Node & {
@@ -3232,18 +3150,6 @@ export type VerificationTokenInvalidError = ErrorResult & {
 
 export type VerifyCustomerAccountResult = CurrentUser | MissingPasswordError | NativeAuthStrategyError | PasswordAlreadySetError | PasswordValidationError | VerificationTokenExpiredError | VerificationTokenInvalidError;
 
-export type WebpayPlusTransaction = Node & {
-  __typename?: 'WebpayPlusTransaction';
-  buyOrder: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ID'];
-  order: Order;
-  sessionId: Scalars['String'];
-  token: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
-  url: Scalars['String'];
-};
-
 export type Zone = Node & {
   __typename?: 'Zone';
   createdAt: Scalars['DateTime'];
@@ -3260,10 +3166,22 @@ export namespace CurrentUser {
   export type Fragment = CurrentUserFragment;
 }
 
-export namespace Me {
-  export type Variables = MeQueryVariables;
-  export type Query = MeQuery;
-  export type Me = (NonNullable<MeQuery['me']>);
+export namespace Order {
+  export type Fragment = OrderFragment;
+  export type Lines = NonNullable<(NonNullable<OrderFragment['lines']>)[number]>;
+  export type ProductVariant = (NonNullable<NonNullable<(NonNullable<OrderFragment['lines']>)[number]>['productVariant']>);
+}
+
+export namespace AddItem {
+  export type Variables = AddItemMutationVariables;
+  export type Mutation = AddItemMutation;
+  export type AddItemToOrder = (NonNullable<AddItemMutation['addItemToOrder']>);
+  export type OrderInlineFragment = (DiscriminateUnion<(NonNullable<AddItemMutation['addItemToOrder']>), { __typename?: 'Order' }>);
+  export type OrderModificationErrorInlineFragment = (DiscriminateUnion<(NonNullable<AddItemMutation['addItemToOrder']>), { __typename?: 'OrderModificationError' }>);
+  export type OrderLimitErrorInlineFragment = (DiscriminateUnion<(NonNullable<AddItemMutation['addItemToOrder']>), { __typename?: 'OrderLimitError' }>);
+  export type NegativeQuantityErrorInlineFragment = (DiscriminateUnion<(NonNullable<AddItemMutation['addItemToOrder']>), { __typename?: 'NegativeQuantityError' }>);
+  export type InsufficientStockErrorInlineFragment = (DiscriminateUnion<(NonNullable<AddItemMutation['addItemToOrder']>), { __typename?: 'InsufficientStockError' }>);
+  export type ErrorResultInlineFragment = (DiscriminateUnion<(NonNullable<AddItemMutation['addItemToOrder']>), { __typename?: 'ErrorResult' }>);
 }
 
 export namespace Login {
@@ -3277,12 +3195,23 @@ export namespace Login {
   export type ErrorResultInlineFragment = (DiscriminateUnion<(NonNullable<LoginMutation['login']>), { __typename?: 'ErrorResult' }>);
 }
 
+export namespace Me {
+  export type Variables = MeQueryVariables;
+  export type Query = MeQuery;
+  export type Me = (NonNullable<MeQuery['me']>);
+}
+
 export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, identifier: string };
 
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+export type OrderFragment = { __typename?: 'Order', id: string, totalWithTax: number, lines: Array<{ __typename?: 'OrderLine', id: string, quantity: number, productVariant: { __typename?: 'ProductVariant', id: string, name: string } }> };
+
+export type AddItemMutationVariables = Exact<{
+  productVariantId: Scalars['ID'];
+  quantity: Scalars['Int'];
+}>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'CurrentUser', id: string, identifier: string } | null | undefined };
+export type AddItemMutation = { __typename?: 'Mutation', addItemToOrder: { __typename?: 'InsufficientStockError', errorCode: ErrorCode, message: string, quantityAvailable: number } | { __typename?: 'NegativeQuantityError', errorCode: ErrorCode, message: string } | { __typename?: 'Order', id: string, totalWithTax: number, lines: Array<{ __typename?: 'OrderLine', id: string, quantity: number, productVariant: { __typename?: 'ProductVariant', id: string, name: string } }> } | { __typename?: 'OrderLimitError', errorCode: ErrorCode, message: string, maxItems: number } | { __typename?: 'OrderModificationError', errorCode: ErrorCode, message: string } };
 
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
@@ -3292,3 +3221,8 @@ export type LoginMutationVariables = Exact<{
 
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'CurrentUser', id: string, identifier: string } | { __typename?: 'InvalidCredentialsError', errorCode: ErrorCode, message: string, authenticationError: string } | { __typename?: 'NativeAuthStrategyError', errorCode: ErrorCode, message: string } | { __typename?: 'NotVerifiedError', errorCode: ErrorCode, message: string } };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'CurrentUser', id: string, identifier: string } | null | undefined };

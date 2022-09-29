@@ -4,10 +4,10 @@ import {
   CurrentUserFragment,
   LoginMutation,
   LoginMutationVariables,
-} from '../shop-generated-types';
+} from '../../shop-generated-types';
 
-import { LOGIN } from '../shop-definitions.graphql';
-import { parseResult } from '../../helpers';
+import { parseResult } from '../../../helpers';
+import { loginGraphql } from './login.graphql';
 
 type Payload = {
   username: string;
@@ -20,7 +20,7 @@ export const loginMutation = async (
   { password, rememberMe, username }: Payload,
 ) => {
   const data = await shopClient.query<LoginMutation, LoginMutationVariables>(
-    LOGIN,
+    loginGraphql,
     { username, password, rememberMe },
   );
 

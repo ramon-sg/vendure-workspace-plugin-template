@@ -3,9 +3,10 @@ import { SimpleGraphQLClient } from '@vendure/testing';
 import {
   LoginMutation,
   LoginMutationVariables,
-} from '../admin-generated-types';
-import { LOGIN } from '../admin-definitions.graphql';
-import { parseResult } from '../../helpers';
+} from '../../admin-generated-types';
+
+import { loginGraphql } from './login.graphql';
+import { parseResult } from '../../../helpers';
 
 type Payload = {
   username: string;
@@ -18,7 +19,7 @@ export const loginMutation = async (
   { password, rememberMe, username }: Payload,
 ) => {
   const data = await adminClient.query<LoginMutation, LoginMutationVariables>(
-    LOGIN,
+    loginGraphql,
     { username, password, rememberMe },
   );
 
