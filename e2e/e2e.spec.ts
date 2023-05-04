@@ -7,7 +7,7 @@ import {
   testConfig,
 } from '@vendure/testing';
 import { TestServer } from '@vendure/testing/lib/test-server';
-import { ExamplePlugin } from '../src/example.plugin';
+import { VendureInternalPlugin } from '../src';
 import { initialData } from './initial-data';
 import path from 'path';
 
@@ -15,14 +15,14 @@ describe('Example plugin e2e', function () {
   let server: TestServer;
   let adminClient: SimpleGraphQLClient;
   let shopClient: SimpleGraphQLClient;
-  let serverStarted = false;
+  const serverStarted = false;
 
   beforeAll(async () => {
     registerInitializer('sqljs', new SqljsInitializer('__data__'));
     const config = mergeConfig(testConfig, {
       logger: new DefaultLogger({ level: LogLevel.Debug }),
       plugins: [
-        ExamplePlugin.init({
+        VendureInternalPlugin.init({
           enabled: true,
         }),
       ],
@@ -36,7 +36,7 @@ describe('Example plugin e2e', function () {
   }, 60000);
 
   it('Should start successfully', async () => {
-    await expect(server.app.getHttpServer).toBeDefined
+    await expect(server.app.getHttpServer).toBeDefined;
   });
 
   // TODO: write your tests here

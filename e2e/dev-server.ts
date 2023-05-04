@@ -13,7 +13,7 @@ import {
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import path from 'path';
-import { ExamplePlugin } from '../src';
+import { VendureInternalPlugin } from '../src';
 import { initialData } from './initial-data';
 
 require('dotenv').config();
@@ -26,8 +26,8 @@ require('dotenv').config();
       AssetServerPlugin.init({
         assetUploadDir: path.join(__dirname, '__data__/assets'),
         route: 'assets',
-    }),
-      ExamplePlugin.init({
+      }),
+      VendureInternalPlugin.init({
         enabled: true,
       }),
       DefaultSearchPlugin,
