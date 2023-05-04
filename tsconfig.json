@@ -4,10 +4,7 @@
     "module": "commonjs",
     "noLib": false,
     "skipLibCheck": true,
-    "lib": [
-      "es2017",
-      "esnext.asynciterable"
-    ],
+    "lib": ["es2017", "esnext.asynciterable"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
@@ -20,15 +17,9 @@
     "declaration": true,
     "outDir": "dist",
     "baseUrl": "./",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
-  "include": [
-    "src"
-  ],
-  "files": [
-    "./index.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"],
+  "files": ["./index.ts"],
+  "exclude": ["node_modules"]
 }
