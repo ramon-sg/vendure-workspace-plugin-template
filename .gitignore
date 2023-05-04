@@ -2,6 +2,7 @@ node_modules
 .idea
 /lib
 
+dist
 e2e/__data__
 
 dev/server/__data__
