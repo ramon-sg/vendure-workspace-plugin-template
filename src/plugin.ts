@@ -2,6 +2,7 @@ import { PluginCommonModule, VendurePlugin } from '@vendure/core';
 
 import { PluginController } from './plugin.controller';
 import { PluginService } from './plugin.service';
+import { PluginInitOptions } from './types';
 
 /**
  * An example Vendure plugin.
@@ -26,4 +27,11 @@ import { PluginService } from './plugin.service';
     resolvers: [],
   },
 })
-export class VendureInternalPlugin {}
+export class VendureInternalPlugin {
+  static options: PluginInitOptions;
+
+  static init(options: PluginInitOptions) {
+    this.options = options;
+    return VendureInternalPlugin;
+  }
+}

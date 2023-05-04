@@ -3,10 +3,10 @@ import { PluginService } from './plugin.service';
 
 @Controller()
 export class PluginController {
-  constructor(private pluginService: PluginService) {}
+    constructor(private pluginService: PluginService) {}
 
-  @Get('plugin/status')
-  getStatus() {
-    return this.pluginService.getStatus();
-  }
+    @Get('plugin/status')
+    getStatus() {
+        return this.pluginService.getStatus();
+    }
 }

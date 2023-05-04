@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# exit when any command fails
+set -e
+
+echo -e "\n1️⃣  Running typecheck...\n"
+yarn typecheck
+
+echo -e "\n\n2️⃣  Running tests...\n"
+yarn test
+
+echo -e "\n\n3️⃣  Running e2e tests...\n"
+yarn test:e2e
+
+echo -e "\n\n4️⃣  Running Linter...\n"
+yarn lint
+
+echo -e "\n\n✅ All checks passed!! ✨ 🌈 🥇\n"
