@@ -5,11 +5,7 @@
   "name": "Vendure Plugin",
   // Update the 'dockerComposeFile' list if you have more compose files or use different names.
   // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
-  "dockerComposeFile": [
-    "../docker-compose.dev.yml",
-    "../docker-compose.dev.macos.yml",
-    "docker-compose.yml"
-  ],
+  "dockerComposeFile": ["../docker-compose.dev.yml", "docker-compose.yml"],
   // The 'service' property is the name of the service for the container that VS Code should
   // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
   "service": "app",
@@ -17,14 +13,19 @@
   // connected. This is typically a file mount in .devcontainer/docker-compose.yml
   "workspaceFolder": "/app",
   // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    "mrmlnc.vscode-duplicate",
-    "roscop.activefileinstatusbar",
-    "bierner.markdown-preview-github-styles",
-    "bierner.github-markdown-preview",
-    "esbenp.prettier-vscode",
-    "graphql.vscode-graphql"
-  ]
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mrmlnc.vscode-duplicate",
+        "roscop.activefileinstatusbar",
+        "bierner.markdown-preview-github-styles",
+        "bierner.github-markdown-preview",
+        "esbenp.prettier-vscode",
+        "graphql.vscode-graphql"
+      ]
+    }
+  }
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
   // Uncomment the next line if you want start specific services in your Docker Compose config.

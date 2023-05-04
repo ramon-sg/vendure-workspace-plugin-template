@@ -9,4 +9,4 @@
 # add `nfs.server.mount.require_resv_port = 0` to /etc/nfs.conf
 # > sudo nano /etc/nfs.conf
 
-docker-compose -f docker-compose.dev.yml -f docker-compose.dev.macos.yml "$@"
+docker-compose -f docker-compose.dev.yml "$@"
