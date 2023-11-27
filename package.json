@@ -26,8 +26,8 @@
     "checks": "scripts/checks"
   },
   "resolutions": {
-    "@vendure/admin-ui": "2.0.0-beta.2",
-    "@vendure/common": "2.0.0-beta.2"
+    "@vendure/admin-ui": "^2.1.4",
+    "@vendure/common": "^2.1.4"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.1.0",
@@ -39,14 +39,14 @@
     "@types/node": "^16.11.1",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
-    "@vendure/admin-ui": "2.0.0-beta.2",
-    "@vendure/admin-ui-plugin": "2.0.0-beta.2",
-    "@vendure/asset-server-plugin": "2.0.0-beta.2",
-    "@vendure/core": "2.0.0-beta.2",
-    "@vendure/create": "2.0.0-beta.2",
-    "@vendure/testing": "2.0.0-beta.2",
-    "@vendure/ui-devkit": "2.0.0-beta.2",
-    "concurrently": "^6.3.0",
+    "@vendure/admin-ui": "^2.1.4",
+    "@vendure/admin-ui-plugin": "^2.1.4",
+    "@vendure/asset-server-plugin": "^2.1.4",
+    "@vendure/core": "^2.1.4",
+    "@vendure/create": "^2.1.4",
+    "@vendure/testing": "^2.1.4",
+    "@vendure/ui-devkit": "^2.1.4",
+    "concurrently": "^8.2.1",
     "eslint": "^8.39.0",
     "gulp": "^4.0.2",
     "jest": "^27.3.0",
